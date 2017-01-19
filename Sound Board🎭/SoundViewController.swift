@@ -35,12 +35,25 @@ class SoundViewController: UIViewController {
       try session.setActive(true)
         
     // Create URL for the audio file
-        
+    
+       
+            let basePath : String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+            let pathComponenets = [basePath,"audio.m4a"]
+            let audioURL = NSURL.fileURL(withPathComponents: pathComponenets)!
+
     // Create settiongs for the audio recorder
-        
+            
+            var settings : [String:AnyObject] = [:]
+            settings[AVFormatIDKey] = Int(kAudioFormatMPEG4AAC) as AnyObject?
+            settings[AVSampleRateKey] = 44100.0 as AnyObject?
+            settings[AVNumberOfChannelsKey] = 2 as AnyObject?
+            
+            
+            
     // Create AudioRecorder object
    
-    audioRecorder = AVAudioRecorder(url: <#T##URL#>, settings: <#T##[String : Any]#>)
+    audioRecorder = try AVAudioRecorder(url: audioURL, settings: settings)
+       audioRecorder!.prepareToRecord()
         } catch let error as NSError {
              print(error)
         }
