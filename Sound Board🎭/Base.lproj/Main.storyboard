@@ -119,7 +119,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="VrW-xR-bpG" id="Fq6-7s-aUb"/>
                         <outlet property="nameTextField" destination="qVq-Md-Ndx" id="ecf-sp-vcX"/>
+                        <outlet property="playButton" destination="VoR-pZ-HkZ" id="Qzo-ca-6wr"/>
                         <outlet property="recordButton" destination="Kqo-Kn-8K7" id="sVy-Ex-2lh"/>
                     </connections>
                 </viewController>
