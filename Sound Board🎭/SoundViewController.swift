@@ -31,7 +31,7 @@ class SoundViewController: UIViewController {
        setupRecorder()
    
         playButton.isEnabled = false
-        
+        addButton.isEnabled = false
         
     
     }
@@ -82,12 +82,24 @@ class SoundViewController: UIViewController {
             //Change button title to record
             recordButton.setTitle("Record", for: .normal)
             playButton.isEnabled = true
-            }else {
+             addButton.isEnabled = true
+        } else {
             //Start the recording 
+            audioPLayer?.stop()
             audioRecorder?.record()
             //Change button title to stop
             recordButton.setTitle("Stop", for: .normal)
         
+            if audioRecorder!.isRecording {
+                
+                playButton.isEnabled = false
+               
+                
+            }else{
+             playButton.isEnabled = true
+            }
+
+       
         
         }
     
@@ -108,6 +120,23 @@ class SoundViewController: UIViewController {
     }
 
     @IBAction func addTapped(_ sender: Any) {
-    }
+   
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+    let sound = Sound(context: context)
+        
+    sound.name = nameTextField.text
+    sound.audio = NSData(contentsOf: audioURL!)
     
+(UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+ navigationController!.popViewController(animated: true)
+        
+        
+    }
+
+    
+
+
+
 }
